@@ -8,12 +8,6 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-var exphbs  = require('express3-handlebars');
-
-var hbs = exphbs.create({
-	defaultLayout: 'main',
-	layoutsDir: __dirname + '/views/layouts'
-});
 
 var app = express();
 
@@ -21,8 +15,8 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+app.set('view engine', 'jade');
+app.set('view options', {layout: true});
 
 app.use(express.favicon());
 app.use(express.logger('dev'));
