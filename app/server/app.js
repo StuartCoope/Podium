@@ -4,24 +4,33 @@
  */
 
 var express = require('express');
-var routes = require('./app/server/routes');
-var user = require('./app/server/routes/user');
+var routes = require('./routes');
+var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var exphbs  = require('express3-handlebars');
+
+var hbs = exphbs.create({
+	defaultLayout: 'main',
+	layoutsDir: __dirname + '/views/layouts'
+});
 
 var app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '/app/server/views');
-app.set('view engine', 'jade');
+app.set('views', __dirname + '/views');
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/app/public'));
-app.use(express.static(path.join(__dirname, '/app/public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // development only
 if ('development' == app.get('env')) {
