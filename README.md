@@ -13,3 +13,6 @@ http://www.thinkster.io/pick/521e8672e2a3b28f98000314/angularjs-tutorial-learn-t
 
 Worth knowing this if messing with jade:
 http://www.devthought.com/code/use-jade-blocks-not-layouts/
+
+http://tutorialzine.com/2013/08/learn-angularjs-5-examples/
+http://docs.angularjs.org/tutorial/step_00
