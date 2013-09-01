@@ -4,33 +4,47 @@ mongoose.connect('mongodb://localhost/user');
 
 var Schema = mongoose.Schema;
 
-var UserSchema = new Schema({
+var userSchema = new Schema({
 	username: { type: String, required: true },
 	password: { type: String, required: true},
 	lastAccessed: { type: Date, default: Date.now },
 	dateJoined: { type: Date, default: Date.now },
 })
 
-var UserModel = mongoose.model('User', UserSchema);
+var User = mongoose.model('User', userSchema);
 
-exports.list = function (){
-	UserModel.find(function (err, users){
+exports.list = function (success, errorHandler){
+	User.find(function (err, users){
 		if(!err){
-			return users;
-		}else{
 			console.log(users);
-			return {};
+			success(users)
+		}else{
+			if(errorHandler){
+				errorHandler(err);
+			}
 		}
 	});
 }
 
-exports.findById = function (id){
-	UserModel.findById(id, function(err, user){
+exports.findById = function (id, success, errorHandler){
+	User.findById(id, function(err, user){
 		if(!err){
-			return user;
+			success(user);
 		}else{
-			console.log(err);
-			return {};
+			errorHandler(err);
 		}
 	})
 }
+
+exports.create = function (user, success, errorHandler){
+	var user = new User(user);
+
+	user.save(function(err){
+		if(err){
+			errorHandler(err);
+		}else{
+			success();
+		}
+	});
+}
+
