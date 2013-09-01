@@ -4,20 +4,22 @@ var userDatasource = require('../datasources/user');
  * GET users listing.
  */
 
+var errorHandler = function(res, err){
+	res.jsonp(err);
+}
+
 exports.list = function(req, res){
-	var users = userDatasource.list();
-	if(users){
+	var users = userDatasource.list(function(users){
 		res.jsonp(users);
-	}else{
-		res.send("no results");
-	}
+	}, function(err){
+		errorHandler(res, err);
+	});
 };
 
 exports.findById = function(req, res){
-	var user = userDatasource.findById(req.params.id);
-	if(user){
+	var user = userDatasource.findById(req.params.id, function(user){
 		res.jsonp(user);
-	}else{
-		res.send("no results");
-	}
+	}, function(err){
+		errorHandler(res, err);
+	});
 }
