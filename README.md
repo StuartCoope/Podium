@@ -13,3 +13,6 @@ http://www.thinkster.io/pick/521e8672e2a3b28f98000314/angularjs-tutorial-learn-t
 
 Worth knowing this if messing with jade:
 http://www.devthought.com/code/use-jade-blocks-not-layouts/
+
+MongoDB with mongoose:
+http://tamaspiros.co.uk/2013/06/27/contact-manager-written-in-angularjs-express-and-mongodb-episode-1/
