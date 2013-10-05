@@ -9,6 +9,7 @@ var userSchema = new Schema({
 	password: { type: String, required: true},
 	lastAccessed: { type: Date, default: Date.now },
 	dateJoined: { type: Date, default: Date.now },
+	roles: { type: Array, default: ["authenticated"] },
 })
 
 var User = mongoose.model('User', userSchema);
@@ -17,7 +18,7 @@ exports.list = function (success, errorHandler){
 	User.find(function (err, users){
 		if(!err){
 			console.log(users);
-			success(users)
+			success(users);
 		}else{
 			if(errorHandler){
 				errorHandler(err);
@@ -34,6 +35,16 @@ exports.findById = function (id, success, errorHandler){
 			errorHandler(err);
 		}
 	})
+}
+
+exports.findByUsername = function(username, success, errorHandler){
+	User.findOne({ 'username': username }, function(err, user){
+		if(!err){
+			success(user);
+		}else{
+			errorHandler(err);
+		}
+	});
 }
 
 exports.create = function (user, success, errorHandler){
