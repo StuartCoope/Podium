@@ -1,5 +1,6 @@
-var userDatasource = require('../datasources/userDatasource');
+"use strict";
 
+var userDatasource = require('../datasources/userDatasource');
 var userController = require('../controllers/userController');
 
 /*
@@ -24,7 +25,7 @@ exports.findById = function(req, res){
 	}, function(err){
 		errorHandler(res, err);
 	});
-}
+};
 
 exports.login = function(req, res){
 	var username = req.params.username;
@@ -32,12 +33,29 @@ exports.login = function(req, res){
 
 	var user = userController.login(username, password, function(response){
 		req.session.loggedIn = true;
-		req.session.loggedInUser = response.user.username;
+		req.session.username = response.user.username;
 		req.session.roles = response.user.roles;
-
-		console.log(response.user.username);
+		req.session.loginTime = new Date();
 
 		res.jsonp(response);
 	});
+};
 
-}
+exports.register = function(req, res){
+	userController.register(req.post, function(response){
+
+	}, function(error){
+		
+	});
+	res.send();
+};
+
+exports.logout = function(req, res){
+	req.session.destroy();
+	res.send();
+};
+
+// route to test if the user is logged in or not 
+exports.loggedIn = function(req, res) { 
+	res.send(req.session["loggedIn"] ? 'true' : 'false');
+};
