@@ -1,6 +1,8 @@
+"use strict";
+
 var userDatasource = require('../datasources/userDatasource');
 
-exports.login = function (username, password, callback){
+var login = function (username, password, callback){
 	userDatasource.findByUsername(username, function(user){
 
 		if(!user){
@@ -31,3 +33,21 @@ exports.login = function (username, password, callback){
 		});
 	});
 }
+
+var ifValid = function(fn){
+	return function(){
+		
+		if(arguments.length === 0){
+			return;
+		}
+
+		console.log(arguments);
+
+		return fn.apply(this, arguments);
+	}
+}
+
+var register = ifValid(userDatasource.create);
+
+exports.login = login;
+exports.register = register;

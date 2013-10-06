@@ -1,3 +1,5 @@
+"use strict";
+
 var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/user');
@@ -7,9 +9,9 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
 	username: { type: String, required: true },
 	password: { type: String, required: true},
-	lastAccessed: { type: Date, default: Date.now },
-	dateJoined: { type: Date, default: Date.now },
-	roles: { type: Array, default: ["authenticated"] },
+	lastAccessed: { type: Date },
+	dateJoined: { type: Date },
+	roles: { type: Array },
 })
 
 var User = mongoose.model('User', userSchema);
