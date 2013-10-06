@@ -16,3 +16,5 @@ http://www.devthought.com/code/use-jade-blocks-not-layouts/
 
 http://tutorialzine.com/2013/08/learn-angularjs-5-examples/
 http://docs.angularjs.org/tutorial/step_00
+
+http://frederiknakstad.com/authentication-in-single-page-applications-with-angular-js/
