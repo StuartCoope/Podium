@@ -1,0 +1,40 @@
+/* app css stylesheet */
+body {
+	padding-top: 20px;
+}
+
+.well {
+  margin-left: 0;
+  border: 1px solid #ccc;
+}
+label {
+  color: #808080;
+  text-shadow: -1px 1px 0 #fff;
+  -moz-text-shadow: -1px 1px 0 #fff;
+  -webkit-text-shadow: -1px 1px 0 #fff;
+}
+button i {
+  padding-left: 8px;
+}
+#login-container button {
+	width: 150px;
+	padding: 6px 40px 6px 40px;
+	float: left;
+	margin-top: 15px;
+}
+
+#login-container .checkbox {
+	margin: 23px 0 0 180px;
+}
+
+#login-container .btm-links {
+	text-align: center;
+	margin-top: 10px;
+}
+#register-container h2{
+	margin-bottom:4px;
+}
+#register-container #btn-register{
+	margin-top:16px;
+	float:right;
+}

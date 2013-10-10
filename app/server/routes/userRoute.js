@@ -28,21 +28,33 @@ exports.findById = function(req, res){
 };
 
 exports.login = function(req, res){
-	var username = req.params.username;
-	var password = req.params.password;
+	var username = req.body.username;
+	var password = req.body.password;
 
 	var user = userController.login(username, password, function(response){
-		req.session.loggedIn = true;
-		req.session.username = response.user.username;
-		req.session.roles = response.user.roles;
-		req.session.loginTime = new Date();
 
-		res.jsonp(response);
+		if(response.success){
+			req.session.loggedIn = true;
+			req.session.username = response.user.username;
+			req.session.roles = response.user.roles;
+			req.session.loginTime = new Date();
+
+			res.jsonp({
+				success: true,
+				username: response.user.username,
+				roles: response.user.roles
+			});
+		}else{
+			res.jsonp({
+				success: false
+			});
+		}
+		
 	});
 };
 
 exports.register = function(req, res){
-	userController.register(req.post, function(response){
+	userController.register(req.body, function(response){
 
 	}, function(error){
 		

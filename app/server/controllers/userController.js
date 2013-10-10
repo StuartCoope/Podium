@@ -10,7 +10,7 @@ var login = function (username, password, callback){
 				success: false,
 				message: "Invalid User"
 			});
-		
+
 		}else if(user.password == password){
 			callback({
 				success: true,
@@ -26,6 +26,7 @@ var login = function (username, password, callback){
 		}
 
 	}, function(err){
+
 		callback({
 			success: false,
 			message: "An error occured",
@@ -36,13 +37,11 @@ var login = function (username, password, callback){
 
 var ifValid = function(fn){
 	return function(){
-		
+
 		if(arguments.length === 0){
 			return;
 		}
-
-		console.log(arguments);
-
+		
 		return fn.apply(this, arguments);
 	}
 }
@@ -51,3 +50,5 @@ var register = ifValid(userDatasource.create);
 
 exports.login = login;
 exports.register = register;
+
+
