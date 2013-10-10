@@ -1,0 +1,27 @@
+<div ng-controller="LoginCtrl" id="login-container">
+  <form method="post" id="login-form" class="well span4">
+    <h1>Hello!</h1>
+
+    <label>Username</label>
+    <input type="text" name="username" ng-model="username" class="span4 required" />
+    <label>Password</label>
+    <input type="text" ng-model="password" name="password" class="span4 required" />
+
+    <button type="submit" id="btn-login" class="btn btn-primary" ng-click="login()">
+        <i class="icon-lock icon-white"></i>
+        Sign in
+    </button>
+    <label id="remember-me" class="checkbox">Remember Me
+        <input type="checkbox" checked="checked">
+    </label>
+
+    <div class="clear-fix"></div>
+
+    <hr>
+    <div class="btm-links">
+        <a href="#" id="forgot-password">Forgot Your Password?</a>
+        <a href="/#/register" id="create-account">Create An Account</a>
+    </div>
+  </form>
+
+</div>
