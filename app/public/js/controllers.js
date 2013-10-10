@@ -6,6 +6,10 @@ var MainCtrl = ['$scope', function($scope){
 }];
 
 var LoginCtrl = ['$scope', 'UserService', function($scope, UserService){
+
+	$scope.loggedIn = false;
+	$scope.loggedInAs = "Stuart";
+
 	$scope.login = function(){
 
 		UserService.Login.save({ 
@@ -19,6 +23,9 @@ var LoginCtrl = ['$scope', 'UserService', function($scope, UserService){
 }];
 
 var RegisterCtrl = ['$scope', 'UserService', function($scope, UserService){
+	
+	$scope.loggedIn = false;
+
 	$scope.register = function(){
 
 		UserService.Register.save({

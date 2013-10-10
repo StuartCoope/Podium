@@ -1,15 +1,20 @@
-<div ng-controller="RegisterCtrl" id="register-container">
-	<form ng-switch="loggedIn" method="post" id="register-form" class="well span4">
-		<h2>Register</h2>
-		<label>Username</label>
-		<input type="text" name="username" ng-model="username" class="span4 required" />
-		<label>Password</label>
-    	<input type="text" ng-model="password" name="password" class="span4 required" />
-    	<label>Email</label>
-		<input type="text" name="email" ng-model="email" class="span4 required" />
-		 <button type="submit" id="btn-register" class="btn btn-primary" ng-click="register()">
-	     	<i class="icon-lock icon-white"></i>
-	        Register
-	    </button>
-	</form>
+<div ng-controller="RegisterCtrl" id="register-container" ng-switch="loggedIn">
+	<div ng-switch-when="false">
+		<form  method="post" id="register-form" class="well span4">
+			<h2>Register</h2>
+			<label>Username</label>
+			<input type="text" name="username" ng-model="username" class="span4 required" />
+			<label>Password</label>
+	    	<input type="text" ng-model="password" name="password" class="span4 required" />
+	    	<label>Email</label>
+			<input type="text" name="email" ng-model="email" class="span4 required" />
+			 <button type="submit" id="btn-register" class="btn btn-primary" ng-click="register()">
+		     	<i class="icon-lock icon-white"></i>
+		        Register
+		    </button>
+		</form>
+	</div>
+	<div ng-switch-when="true">
+		<h2>You are already registered</h2>
+	</div>
 </div>
