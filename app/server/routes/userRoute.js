@@ -92,15 +92,17 @@ var performLogin = function(username, password, req, res){
 
 exports.logout = function(req, res){
 	req.session.destroy();
-	res.send();
+	res.jsonp({success: true});
 };
 
 // route to test if the user is logged in or not 
 exports.loginStatus = function(req, res) { 
 	
 	var publicUserData = false;
+	var loggedIn = false;
 
 	if(req.session.loggedIn){
+		loggedIn = true;
 		publicUserData = {
 			id: req.session.user.id,
 			username: req.session.user.username,
@@ -109,7 +111,7 @@ exports.loginStatus = function(req, res) {
 	}
 
 	res.jsonp({
-		loggedin: req.session.loggedIn,
+		loggedIn: loggedIn,
 		user: publicUserData
 	});
 	//res.send(req.session["loggedIn"] ? 'true' : 'false');

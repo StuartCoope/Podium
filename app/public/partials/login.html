@@ -1,6 +1,7 @@
 <div ng-controller="LoginCtrl" ng-switch="UserService.isLoggedIn" id="login-container">
   <div ng-switch-when="true">
-    <h2>Welcome {{loggedInAs}}</h2>
+    <h2>Welcome {{UserService.user.username}}</h2>
+    <button type="submit" id="btn-logout" class="btn btn-primary" ng-click="logout()">Logout</button>
   </div>
   <div ng-switch-when="false">
       <form method="post" id="login-form" class="well span4">
