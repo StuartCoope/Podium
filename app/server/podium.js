@@ -27,7 +27,7 @@ var enforceRole = function(role){
 
 app.get('/api/users', enforceRole("admin"), userRoute.list);
 app.get('/api/users/:id', enforceRole("admin"), userRoute.findById);
-app.get('/api/loggedin', userRoute.loggedIn);
+app.get('/api/loginstatus', userRoute.loginStatus);
 app.get('/api/logout', userRoute.logout);
 
 app.post('/api/login', userRoute.login);

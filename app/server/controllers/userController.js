@@ -13,7 +13,6 @@ var login = function (username, password, callback){
 			});
 
 		}else if(user.password == password){
-			console.log(user);
 			callback({
 				success: true,
 				message: "Login success",

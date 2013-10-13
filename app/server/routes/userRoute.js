@@ -66,18 +66,19 @@ var performLogin = function(username, password, req, res){
 
 		if(response.success){
 
+			var publicUserData = {
+				id: response.user._id,
+				username: response.user.username,
+				roles: response.user.roles,
+			}
+
 			req.session.loggedIn = true;
-			req.session.username = response.user.username;
-			req.session.roles = response.user.roles;
+			req.session.user = publicUserData;
 			req.session.loginTime = new Date();
 			
 			res.jsonp({
 				success: true,
-				user: {
-					id: response.user._id,
-					username: response.user.username,
-					roles: response.user.roles,
-				}
+				user: publicUserData
 			});
 
 		}else{
@@ -95,6 +96,22 @@ exports.logout = function(req, res){
 };
 
 // route to test if the user is logged in or not 
-exports.loggedIn = function(req, res) { 
-	res.send(req.session["loggedIn"] ? 'true' : 'false');
+exports.loginStatus = function(req, res) { 
+	
+	var publicUserData = false;
+
+	if(req.session.loggedIn){
+		publicUserData = {
+			id: req.session.user.id,
+			username: req.session.user.username,
+			roles: req.session.user.roles,
+		};
+	}
+
+	res.jsonp({
+		loggedin: req.session.loggedIn,
+		user: publicUserData
+	});
+	//res.send(req.session["loggedIn"] ? 'true' : 'false');
 };
+
