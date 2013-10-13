@@ -36,17 +36,6 @@ var login = function (username, password, callback){
 	});
 }
 
-var ifValid = function(fn){
-	return function(){
-
-		if(arguments.length === 0){
-			return;
-		}
-		
-		return fn.apply(this, arguments);
-	}
-}
-
 var register = function(user, callback){
 	user.roles = [ "authenticated" ]
 	userDatasource.create(user, function(record){

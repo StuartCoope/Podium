@@ -17,10 +17,19 @@ var LoginCtrl = ['$scope', 'UserService', function($scope, UserService){
 		UserService.login($scope.loginForm.username, $scope.loginForm.password, function(res){
 			if(!res.success){
 				$scope.errorMessage = "<strong>Oh no!</strong> Invalid username or password";
+			}else{
+				//success, clear the form now in case it is reused later
+				$scope.loginForm.username = "";
+				$scope.loginForm.password = "";
 			}
 		});
 
 	};
+
+	$scope.logout = function(){
+		UserService.logout();
+	}
+
 }];
 
 var RegisterCtrl = ['$scope', 'UserService', function($scope, UserService){
@@ -38,9 +47,19 @@ var RegisterCtrl = ['$scope', 'UserService', function($scope, UserService){
 		}, function(res){
 			if(!res.success){
 				$scope.errorMessage = res.error;
+			}else{
+				//success, clear the form now in case it is reused later
+				$scope.registrationForm.username = "";
+				$scope.registrationForm.password = "";
+				$scope.registrationForm.email = "";
 			}
 		});
 	}
+
+	$scope.logout = function(){
+		UserService.logout();
+	}
+
 }];
 
 var PodiumCtrl = ['$scope', function($scope){
