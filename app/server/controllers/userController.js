@@ -3,6 +3,7 @@
 var userDatasource = require('../datasources/userDatasource');
 
 var login = function (username, password, callback){
+	
 	userDatasource.findByUsername(username, function(user){
 
 		if(!user){
@@ -12,6 +13,7 @@ var login = function (username, password, callback){
 			});
 
 		}else if(user.password == password){
+			console.log(user);
 			callback({
 				success: true,
 				message: "Login success",
@@ -46,7 +48,14 @@ var ifValid = function(fn){
 	}
 }
 
-var register = ifValid(userDatasource.create);
+var register = function(user, callback){
+	user.roles = [ "authenticated" ]
+	userDatasource.create(user, function(record){
+		callback({ success: true});
+	}, function(err){
+		callback({ success: false, error: err});
+	});
+}
 
 exports.login = login;
 exports.register = register;

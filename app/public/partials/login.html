@@ -1,15 +1,17 @@
-<div ng-controller="LoginCtrl" ng-switch="loggedIn" id="login-container">
+<div ng-controller="LoginCtrl" ng-switch="UserService.isLoggedIn" id="login-container">
   <div ng-switch-when="true">
     <h2>Welcome {{loggedInAs}}</h2>
   </div>
   <div ng-switch-when="false">
       <form method="post" id="login-form" class="well span4">
-        <h1>Hello!</h1>
+        <h2>Hello!</h2>
 
+        <div ng-show="errorMessage" class="alert alert-error" ng-bind-html-unsafe="errorMessage"></div>
+        
         <label>Username</label>
-        <input type="text" name="username" ng-model="username" class="span4 required" />
+        <input type="text" name="username" ng-model="loginForm.username" class="span4 required" />
         <label>Password</label>
-        <input type="text" ng-model="password" name="password" class="span4 required" />
+        <input type="text" name="password" ng-model="loginForm.password" class="span4 required" />
 
         <button type="submit" id="btn-login" class="btn btn-primary" ng-click="login()">
             <i class="icon-lock icon-white"></i>
