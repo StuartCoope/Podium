@@ -31,19 +31,55 @@ exports.login = function(req, res){
 	var username = req.body.username;
 	var password = req.body.password;
 
+	performLogin(username, password, req, res);
+};
+
+exports.register = function(req, res){
+	var user = {
+		username: req.body.username,
+		password: req.body.password,
+		email: req.body.email
+	}
+	
+	userController.register(user, function(response){
+		if(response.success){
+			performLogin(req.body.username, req.body.password, req, res);
+		}else{
+			if(!response.error.code){
+				res.jsonp({success: false, error: "Unable to register"});
+				return;
+			}
+			switch(response.error.code){
+				case 11000: 
+					res.jsonp({success: false, error: "Username or email already exists"});
+					break;
+				default:
+					res.jsonp({success: false, error: "Unable to register"});
+					break;
+			}
+		}
+	});
+};
+
+var performLogin = function(username, password, req, res){
 	var user = userController.login(username, password, function(response){
 
 		if(response.success){
+
 			req.session.loggedIn = true;
 			req.session.username = response.user.username;
 			req.session.roles = response.user.roles;
 			req.session.loginTime = new Date();
-
+			
 			res.jsonp({
 				success: true,
-				username: response.user.username,
-				roles: response.user.roles
+				user: {
+					id: response.user._id,
+					username: response.user.username,
+					roles: response.user.roles,
+				}
 			});
+
 		}else{
 			res.jsonp({
 				success: false
@@ -51,16 +87,7 @@ exports.login = function(req, res){
 		}
 		
 	});
-};
-
-exports.register = function(req, res){
-	userController.register(req.body, function(response){
-
-	}, function(error){
-		
-	});
-	res.send();
-};
+}
 
 exports.logout = function(req, res){
 	req.session.destroy();

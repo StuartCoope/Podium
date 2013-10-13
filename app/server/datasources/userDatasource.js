@@ -2,24 +2,24 @@
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/user');
+mongoose.connect('mongodb://localhost/podium');
 
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-	username: { type: String, required: true },
+	username: { type: String, required: true, index: { unique: true, sparse: true } },
 	password: { type: String, required: true},
+	email: { type: String, required: true, index: { unique: true, sparse: true } },
 	lastAccessed: { type: Date },
 	dateJoined: { type: Date },
 	roles: { type: Array },
-})
+});
 
 var User = mongoose.model('User', userSchema);
 
 exports.list = function (success, errorHandler){
 	User.find(function (err, users){
 		if(!err){
-			console.log(users);
 			success(users);
 		}else{
 			if(errorHandler){
@@ -27,7 +27,7 @@ exports.list = function (success, errorHandler){
 			}
 		}
 	});
-}
+};
 
 exports.findById = function (id, success, errorHandler){
 	User.findById(id, function(err, user){
@@ -36,8 +36,8 @@ exports.findById = function (id, success, errorHandler){
 		}else{
 			errorHandler(err);
 		}
-	})
-}
+	});
+};
 
 exports.findByUsername = function(username, success, errorHandler){
 	User.findOne({ 'username': username }, function(err, user){
@@ -47,17 +47,17 @@ exports.findByUsername = function(username, success, errorHandler){
 			errorHandler(err);
 		}
 	});
-}
+};
 
 exports.create = function (user, success, errorHandler){
 	var user = new User(user);
 
-	user.save(function(err){
+	user.save(function(err, record, numberAffected){
 		if(err){
 			errorHandler(err);
 		}else{
-			success();
+			success(record);
 		}
 	});
-}
+};
 
