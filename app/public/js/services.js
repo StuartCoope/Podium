@@ -3,8 +3,6 @@
 /* Services */
 angular.module('podiumServices', ['ngResource'])
 	.factory('UserService', function($resource){
-		
-		
 
 		var loginRequest = $resource('api/login', {}, {});
 		var registerRequest = $resource('api/register', {}, {});
@@ -21,7 +19,7 @@ angular.module('podiumServices', ['ngResource'])
 					username: username, 
 					password: password 
 				}, function(res){
-					console.log(res);
+
 					if(res.success){
 						userService.isLoggedIn = true;
 						userService.user = res.user;
@@ -41,6 +39,7 @@ angular.module('podiumServices', ['ngResource'])
 
 						userService.isLoggedIn = true;
 						userService.user = res.user;
+						
 					}
 					callback(res);
 				});
