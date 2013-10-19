@@ -1,0 +1,14 @@
+<div ng-controller="MainCtrl" ng-switch on="content">
+	<div ng-switch-when="">Homepage</div>
+	<div ng-switch-when="welcome"></div>
+	<div ng-switch-when="login">
+		<ng-include src='"users/partials/login.html"'></ng-include>
+	</div>
+	<div ng-switch-when="register">
+		<ng-include src='"users/partials/register.html"'></ng-include>
+	</div>
+	<div ng-switch-default>
+		<ng-include src='"podium/partials/not-found.html"'></ng-include>
+	</div>
+
+</div>
