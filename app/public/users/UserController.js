@@ -1,23 +1,8 @@
-'use strict';
+"use strict";
 
-var test = angular.module("test");
+var users = angular.module("users");
 
-test.controller("TestCtrl", ['$scope', function($scope){
-	alert("TestCtrl");
-}]);
-
-var podium = angular.module("podium");
-
-/* Controllers */
-podium.controller("MainCtrl", ['$scope', function($scope){
-	
-}]);
-
-podium.controller("PodiumCtrl" ['$scope', function($scope){
-	
-}]);
-
-podium.controller("LoginCtrl", ['$scope', 'UserService', function($scope, UserService){
+users.controller("LoginCtrl", ["$scope", "$location", "UserService", function($scope, $location, UserService){
 
 	$scope.loginForm = {};
 	$scope.errorMessage = false;
@@ -38,13 +23,17 @@ podium.controller("LoginCtrl", ['$scope', 'UserService', function($scope, UserSe
 
 	};
 
+	$scope.showLogin = function(){
+		$location.path("/login");
+	};
+
 	$scope.logout = function(){
 		UserService.logout();
 	}
 
 }]);
 
-podium.controller('RegisterCtrl', ['$scope', 'UserService', function($scope, UserService){
+users.controller("RegisterCtrl", ["$scope", "UserService", function($scope, UserService){
 
 	$scope.registrationForm = {};
 	$scope.errorMessage = false;
@@ -72,4 +61,8 @@ podium.controller('RegisterCtrl', ['$scope', 'UserService', function($scope, Use
 		UserService.logout();
 	}
 
+}]);
+
+users.controller("LoginSwitch", ["$scope", "UserService", function($scope, UserService){
+	
 }]);

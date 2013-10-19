@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
 /* Services */
-angular.module('podiumServices', ['ngResource'])
-	.factory('UserService', function($resource){
+angular.module("users.service", ["ngResource"], function($provide){
+	$provide.factory("UserService", function($resource){
 
-		var loginRequest = $resource('api/login', {}, {});
-		var logoutRequest = $resource('api/logout', {}, {});
-		var registerRequest = $resource('api/register', {}, {});
-		var loginStatusRequest = $resource('api/loginstatus', {}, {});
+		var loginRequest = $resource("api/login", {}, {});
+		var logoutRequest = $resource("api/logout", {}, {});
+		var registerRequest = $resource("api/register", {}, {});
+		var loginStatusRequest = $resource("api/loginstatus", {}, {});
 
 		var userService = {
 
@@ -72,5 +72,5 @@ angular.module('podiumServices', ['ngResource'])
 		userService.checkLoginStatus();
 
 		return userService;
-
 	});
+});
