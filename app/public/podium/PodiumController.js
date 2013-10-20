@@ -19,3 +19,8 @@ podium.controller("PodiumCtrl" ["$scope", function($scope){
 }]);
 
 
+podium.controller("HeaderCtrl" ["$scope", function($scope){
+	
+}]);
+
+

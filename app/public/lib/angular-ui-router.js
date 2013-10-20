@@ -765,7 +765,7 @@ angular.module('ui.router.router').provider('$urlRouter', $UrlRouterProvider);
 $StateProvider.$inject = ['$urlRouterProvider', '$urlMatcherFactoryProvider', '$locationProvider'];
 function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $locationProvider) {
 
-  var root, states = {}, $state;
+  var root, states = {}, $state, queue = {};
 
   // Builds state properties from definition passed to registerState()
   var stateBuilder = {
@@ -902,6 +902,13 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
     return undefined;
   }
 
+  function queueState(parentName, state){
+    if(!queue[parentName]){
+      queue[parentName] = [];
+    }
+    queue[parentName].push(state); 
+  }
+
 
   function registerState(state) {
     // Wrap a new object around the state so we can store our private details easily.
@@ -914,6 +921,17 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
     var name = state.name;
     if (!isString(name) || name.indexOf('@') >= 0) throw new Error("State must have a valid name");
     if (states[name]) throw new Error("State '" + name + "'' is already defined");
+
+    //get parent name
+    var parentName =
+      (name.indexOf('.') !== -1) ? name.substring(0, name.lastIndexOf('.'))
+        : (isString(state.parent)) ? state.parent
+        : '';
+
+    // If parent is not registered yet, add state to queue and register later
+    if (parentName && !states[parentName]) {
+      return queueState(parentName, state.self);
+    }
 
     for (var key in stateBuilder) {
       state[key] = stateBuilder[key](state);
@@ -928,6 +946,14 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory,           $
         }
       }]);
     }
+
+    // Register any queued children
+    if (queue[name]) {
+      for (var i = 0; i < queue[name].length; i++) {
+        registerState(queue[name][i]);
+      }
+    }
+
     return state;
   }
 
