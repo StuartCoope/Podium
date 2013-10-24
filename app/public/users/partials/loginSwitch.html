@@ -1,0 +1,9 @@
+<div ng-controller="LoginCtrl" ng-switch="UserService.isLoggedIn" id="login-container">
+  <div ng-switch-when="true">
+	<span class="logout" ng-click="logout()">Logout</span>
+  </div>
+  <div ng-switch-when="false">
+	<span class="login" ng-click="showLogin()">Login</span>
+  </div>
+  
+</div>

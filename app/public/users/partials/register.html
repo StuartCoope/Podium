@@ -1,0 +1,24 @@
+<div ng-controller="RegisterCtrl" id="register-container" ng-switch="UserService.isLoggedIn">
+	<div ng-switch-when="false">
+		<form  method="post" id="register-form" class="well span4">
+			<h2>Register</h2>
+
+			<div ng-show="errorMessage" class="alert alert-error" ng-bind-html-unsafe="errorMessage"></div>
+
+			<label>Username</label>
+			<input type="text" name="username" ng-model="registrationForm.username" class="span4 required" />
+			<label>Password</label>
+	    	<input type="text" name="password" ng-model="registrationForm.password" class="span4 required" />
+	    	<label>Email</label>
+			<input type="text" name="email" ng-model="registrationForm.email" class="span4 required" />
+			 <button type="submit" id="btn-register" class="btn btn-primary" ng-click="register()">
+		     	<i class="icon-lock icon-white"></i>
+		        Register
+		    </button>
+		</form>
+	</div>
+	<div ng-switch-when="true">
+		<h2>You are already registered</h2>
+		<button type="submit" id="btn-logout" class="btn btn-primary" ng-click="logout()">Logout</button>
+	</div>
+</div>
