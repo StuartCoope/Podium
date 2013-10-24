@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" ng-app="podium">
+<head> 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+  
+  <title>Podium</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <script src="lib/angular-ui-router.js"></script>
+
+  <script src="podium/PodiumModule.js"></script>
+  <script src="users/UserModule.js"></script>
+  
+  <script src="users/UserService.js"></script>
+  <script src="users/UserController.js"></script>
+  <script src="podium/PodiumController.js"></script>  
+
+  
+  
+</head>
+<body>
+  <div ui-view="header"></div>
+  <div class="content" ui-view="content"></div>
+</body>
+</html>
