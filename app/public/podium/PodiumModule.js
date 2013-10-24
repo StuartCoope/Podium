@@ -33,23 +33,11 @@ podium.config(["$stateProvider", "$routeProvider", function($stateProvider, $rou
 					templateUrl: 'podium/partials/list.html'
 				}
 			}
-		});
+		})
+		.state("main.notfound", {
+			url: "*path",
+			templateUrl: "podium/partials/not-found.html"
+		})
 
 }]);
 
-var users = angular.module("users", ["users.service", "ui.router"]);
-
-users.config(["$stateProvider", "$routeProvider", function($stateProvider, $routeProvider){
-
-	$stateProvider
-		.state("main.register", {
-			url: '/register',
-			views: {
-				'content@': {
-					templateUrl: 'users/partials/register.html',
-					controller: 'RegisterCtrl'
-				}
-			}
-		});
-
-}]);
