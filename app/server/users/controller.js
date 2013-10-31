@@ -1,6 +1,6 @@
 "use strict";
 
-var userDatasource = require('../datasources/userDatasource');
+var userDatasource = require('./datasource');
 
 var login = function (username, password, callback){
 	
