@@ -1,7 +1,7 @@
 "use strict";
 
-var userDatasource = require('../datasources/userDatasource');
-var userController = require('../controllers/userController');
+var userDatasource = require('./datasource');
+var userController = require('./controller');
 
 /*
  * GET users listing.
