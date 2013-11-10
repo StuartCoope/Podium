@@ -12,6 +12,7 @@
     "mongodb": ">= 0.9.6-7",
     "jade": "*",
     "mongoose": "*",
-    "express-session-mongo": "*"
+    "express-session-mongo": "*",
+    "underscore": "*"
   }
 }
