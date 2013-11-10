@@ -11,8 +11,8 @@ var express = require('express'),
 /**
  * Internal Dependencies
  */
-var podium = require('./podium'),
-	users = require('./users/users');
+var	users = require('./users/module'),
+	podium = require('./podium/module');
 
 var app = express();
 
@@ -44,6 +44,9 @@ if ('development' == app.get('env')) {
 
 app.use(users);
 app.use(podium);
+
+//Default handler
+app.use(express.static(path.join(__dirname, '../public')));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

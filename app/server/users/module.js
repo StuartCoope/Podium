@@ -6,6 +6,8 @@ var express = require('express'),
 //http://vimeo.com/56166857
 var app = module.exports = express();
 
+var User = require('./models/User');
+
 /**
  * Routes
  */
