@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/podium');
+var conn = mongoose.createConnection('mongodb://localhost/podium');
 
 var Schema = mongoose.Schema;
 
@@ -15,7 +15,7 @@ var userSchema = new Schema({
 	roles: { type: Array },
 });
 
-var User = mongoose.model('User', userSchema);
+var User = conn.model('User', userSchema);
 
 exports.list = function (success, errorHandler){
 	User.find(function (err, users){

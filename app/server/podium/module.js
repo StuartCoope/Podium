@@ -3,9 +3,13 @@
 var express = require('express'),
 	path = require('path');
 
-//http://vimeo.com/56166857
+var utils = require('../lib/utils');
+
 var app = module.exports = express();
 
 /**
  * Default handler
  */
+var podiumRouter = require('./router');
+
+app.get('/api/podium/tournaments', utils.enforceRole("admin"), podiumRouter.listTournaments);
