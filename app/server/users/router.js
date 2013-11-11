@@ -1,30 +1,23 @@
 "use strict";
 
-var userDatasource = require('./datasource');
 var userController = require('./controller');
-
+var utils = require('../lib/utils');
 /*
  * GET users listing.
  */
 
-var errorHandler = function(res, err){
-	res.jsonp(err);
-}
-
 exports.list = function(req, res){
-	var users = userDatasource.list(function(users){
+
+	userController.list(function(users){
 		res.jsonp(users);
-	}, function(err){
-		errorHandler(res, err);
-	});
+	}, utils.errorHandler(res));
+
 };
 
 exports.findById = function(req, res){
-	var user = userDatasource.findById(req.params.id, function(user){
+	userController.findById(req.params.id, function(user){
 		res.jsonp(user);
-	}, function(err){
-		errorHandler(res, err);
-	});
+	}, utils.errorHandler(res));
 };
 
 exports.login = function(req, res){
