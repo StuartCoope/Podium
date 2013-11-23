@@ -12,4 +12,4 @@ var app = module.exports = express();
  */
 var podiumRouter = require('./router');
 
-app.get('/api/podium/tournaments', utils.enforceRole("admin"), podiumRouter.listTournaments);
+app.get('/api/podium/tournaments', podiumRouter.listTournaments);

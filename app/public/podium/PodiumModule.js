@@ -2,6 +2,7 @@
 
 var podium = angular.module("podium", [
 	"users",
+	"tournament",
 	"ui.router"
 ]);
 
@@ -23,14 +24,6 @@ podium.config(["$stateProvider", "$routeProvider", function($stateProvider, $rou
 			views: {
 				'content@': {
 					templateUrl: 'podium/partials/main.html'
-				}
-			}
-		})
-		.state("main.list", {
-			url: '/list',
-			views: {
-				'content@': {
-					templateUrl: 'podium/partials/list.html'
 				}
 			}
 		})
