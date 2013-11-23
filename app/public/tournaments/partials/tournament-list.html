@@ -1,0 +1,10 @@
+<div ng-controller="TournamentListCtrl">
+	<div>Tournament List!</div>
+	<span>Count: {{tournaments.length}}</span>
+	<ul class="tournaments">
+		<li ng-repeat="t in tournaments">
+			<p>{{t.title}}</p>
+		</li>
+	</ul>
+
+</div>
