@@ -12,6 +12,7 @@ tournament.controller("TournamentListCtrl", ["$scope", "$routeParams", "Tourname
 
 	var tournamentList = TournamentService.list(function(res){
 		$scope.tournaments = res.tournaments;
+		console.log($scope.tournaments);
 	});
 	
 }]);
